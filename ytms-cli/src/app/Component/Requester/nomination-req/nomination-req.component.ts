@@ -22,6 +22,7 @@ export class NominationReqComponent {
   grades:any;
   competencies:any;
   id:any;
+  isEdit=false;
 
     ngOnInit(): void {
     this.nominationReqForm = this.formBuilder.group(
@@ -49,6 +50,7 @@ export class NominationReqComponent {
     
     if(data!=null){
       this.id=data.id;
+      this.isEdit=data.isEdit;
       console.log("id-----",+this.id)
     }
     this.loadLocation();
@@ -92,7 +94,13 @@ export class NominationReqComponent {
       }
       else if(trainingId!=null && trainingId >0){
         this.nominationReqForm.controls['trainingId'].setValue(trainingId);
-        this.ser.saveNomination(this.nominationReqForm.value).subscribe();
+        this.ser.saveNomination(this.nominationReqForm.value).subscribe(data=>{
+          if(this.isEdit){
+            console.log("Response Data :" +data)
+            this.ser.createAttendanceforNewNomination(data.trainingId,data.id).subscribe();
+          }
+          
+        });
         //this.trf.reloadComponent();
       }
       else{
