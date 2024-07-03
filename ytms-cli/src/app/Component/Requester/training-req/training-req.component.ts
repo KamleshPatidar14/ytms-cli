@@ -223,7 +223,10 @@ export class TrainingReqComponent {
   openDialog(templateRef: any) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '50%',
-      height: '50%'
+      height: '50%',
+      data: {
+        isEdit: this.isEdit
+      }
     });
 
     /* dialogRef.afterClosed().subscribe(() => {

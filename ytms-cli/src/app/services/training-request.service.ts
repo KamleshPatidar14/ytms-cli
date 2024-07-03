@@ -249,4 +249,8 @@ export class TrainingRequestService {
   getAbsentData(tarningId: any,emailId:any): Observable<any[]> {
     return this.http.get<any[]>(this.url + "/register/attendance/attendViewData/" + tarningId+"/"+emailId);
   }
+
+  createAttendanceforNewNomination(tarningId: any,nominationId:any) {
+    return this.http.get<any>(this.url +"/register/attendance/createAttendanceforNewNomination/" + tarningId+"/"+nominationId);
+  }
 }
