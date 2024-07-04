@@ -217,7 +217,7 @@ export class TrainingRequestService {
     a.setAttribute('style', 'display: none');
     a.setAttribute('target', 'blank');
     a.href = url;
-    a.download = "AttdenaceReport_traningId_" + data + "_" + trainingName + ".xlsx";
+    a.download = "AttendanceReport_traningId_" + data + "_" + trainingName + ".xlsx";
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
