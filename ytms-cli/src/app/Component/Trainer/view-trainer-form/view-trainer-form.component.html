@@ -16,11 +16,19 @@
                         <!-- <span title="Apply Leave" (click)="applyLeave()" style="display: inline-block;float: right;"><i
                                 class="fa-solid fa-calendar-days"></i></span> -->
                     </div>
-                    <div class="container h-100">
-                        <div class="d-flex justify-content-center h-100">
+                    <div class="container h-100" style="margin-right: inherit;">
+                        <div class="d-flex justify-content-between align-items-center h-100">
+                            <div class="flex-grow-1"></div>
                             <div class="searchbar">
-                                <input type="text" class="search_input" name="search" placeholder="Search..." [(ngModel)]="searchText" (keyup)="search()">
+                                <input type="text" class="search_input" name="search" placeholder="Search..."
+                                    [(ngModel)]="searchText">
                                 <i class="fa fa-search"></i>
+                            </div>
+                            <div class="flex-grow-1 d-flex justify-content-end">
+                                <button matBadge="{{totalCount}}" (click)="clickAll()" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">All</button>
+                                <button matBadge="{{pendingCount}}" matBadgeColor="warn" (click)="clickPending()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">PENDING</button>
+                                <button matBadge="{{approvedCount}}" matBadgeColor="warn" (click)="clickApprove()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px">APPROVED</button>
+                                <button matBadge="{{inProgressCount}}" matBadgeColor="warn" (click)="clickInProgress()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px">IN PROGRESS</button>
                             </div>
                         </div>
                     </div>
@@ -48,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let training of trainingReqForms |filter:searchText">
+                            <tr *ngFor="let training of trainingReqForms |filter:searchText" [ngStyle]="checkOnCondition(training)">
                                 <td>{{training.id}}</td>
                                 <td>{{training.trainingName}}</td>
 

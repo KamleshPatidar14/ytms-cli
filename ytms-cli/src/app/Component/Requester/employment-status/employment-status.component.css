@@ -1,0 +1,9 @@
+mat-dialog-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    width: 100%;
+}

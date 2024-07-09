@@ -208,7 +208,7 @@ export class AddAttendanceComponent {
 
   getSelectedDateData(selecteddate:any){
     this.ser.getselectedDateTranieeData(selecteddate,this.trainingId).subscribe((resp:any)=>{
-      console.log(resp)
+      console.log("getSelectedDateData :"+resp)
       this.trainingDataList=resp;
       this.countAbsentAndPresentTrainee()
      

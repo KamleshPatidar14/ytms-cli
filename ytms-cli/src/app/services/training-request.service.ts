@@ -253,4 +253,11 @@ export class TrainingRequestService {
   createAttendanceforNewNomination(tarningId: any,nominationId:any) {
     return this.http.get<any>(this.url +"/register/attendance/createAttendanceforNewNomination/" + tarningId+"/"+nominationId);
   }
+
+  updateNomination(nomination: any) {
+    console.log("on service" + JSON.stringify(nomination));
+    return this.http.post<any>(this.url + "/register/updateNomination", nomination);
+  }
+
+  
 }
