@@ -30,6 +30,7 @@ import { AddScoreComponent } from './add-score/add-score.component';
 import { AddLeaveComponent } from './add-leave/add-leave.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AbsentDeatilsComponent } from './absent-deatils/absent-deatils.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { AbsentDeatilsComponent } from './absent-deatils/absent-deatils.componen
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatBadgeModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatTooltipModule,
     MatProgressSpinnerModule,

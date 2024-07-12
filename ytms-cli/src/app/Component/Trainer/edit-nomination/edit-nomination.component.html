@@ -8,7 +8,16 @@
                    <h5 class="heading-color">Nomination List</h5>
                 </div>
                 <div>
-                   <a> Number Of Nomination : {{nomination.length}} </a>
+                  <div class="row">
+                     <div class="col">
+                        <button matBadge="{{totalCount}}" (click)="clickAll()" class="btn btn-primary btn-block btn-m" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">All</button>
+                        <button matBadge="{{activeDataCount}}" (click)="clickActive()" class="btn btn-primary btn-block btn-m" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">Active</button>
+                        <button matBadge="{{resignDataCount}}" (click)="clickResign()" class="btn btn-primary btn-block btn-m" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">Resign</button>
+                        <button matBadge="{{deployDataCount}}" (click)="clickDeploy()" class="btn btn-primary btn-block btn-m" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">Deploy</button>
+                     </div>
+                    
+                  </div>
+                   
                    <table>
                       <thead>
                          <tr>
@@ -28,11 +37,12 @@
                             <th>current_allocation</th>
                             <th>project</th>
                             <th>current_location</th>
+                            <th>Employment Status</th>
                             <th>Action</th>
                          </tr>
                       </thead>
                       <tbody>
-                         <tr *ngFor="let nomi of nomination">
+                         <tr *ngFor="let nomi of nomination" [ngStyle]="{'background-color': nomi.employment_status!=='Active' ? '#FFADB0' : 'inherit' }">
                             <td>{{nomi.emp_id}}</td>
                             <td>{{nomi.emp_name}}</td>
                             <td>{{nomi.emp_mail_id}}</td>
@@ -41,7 +51,11 @@
                             <td>{{nomi.current_allocation}}</td>
                             <td>{{nomi.project}}</td>
                             <td>{{nomi.current_location}}</td>
-                            <td><span class="inner"><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
+                            <td>{{nomi.employment_status}}</td>
+                            <td>
+                              <span class="inner"><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span>
+                              <span class="inner" style="padding-left: 10px;"><i class=" btn-info btn-sm fa fa-edit" title="Delete" (click)="editEmploymentStatus(nomi)"></i></span>
+                           </td>
                          </tr>
                       </tbody>
                    </table>

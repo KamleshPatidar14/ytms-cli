@@ -19,4 +19,5 @@ export class Nomination {
     workQuality!:string;
     overAllRating!:string;
     competency!:string;
+    employment_status?:any
 }

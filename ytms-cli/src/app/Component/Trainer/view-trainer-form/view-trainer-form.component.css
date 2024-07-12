@@ -307,3 +307,9 @@ tr:nth-child(even) {
     text-decoration: none;
 }
 /*css for search bar start */
+.fa.fa-file-excel-o:active {
+    color: green;
+}
+.fa.fa-file-excel-o::after {
+    color: green;
+    }

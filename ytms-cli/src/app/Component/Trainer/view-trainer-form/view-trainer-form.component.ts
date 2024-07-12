@@ -26,6 +26,14 @@ export class ViewTrainerFormComponent {
   trainingReqForms : any[]=[];
   role: string = '';
   searchText = '';
+  pendingCount:any;
+  totalCount:any;
+  pendingData:any;
+  inProgressCount:any;
+  inProgressData:any
+  approvedCount:any;
+  aprroveData:any;
+  allTrainingList:any
   constructor(private authService:AuthService,
     private jwtService:JwtService,
     private ser:TrainingRequestService,private downloadService: DownloadService,
@@ -68,10 +76,37 @@ downloadFile(data: any) {
 }
 
 
+clickAll(){
+  this.trainingReqForms=this.allTrainingList
+}
+clickPending(){
+  this.trainingReqForms=this.pendingData
+}
+clickApprove(){
+  this.trainingReqForms=this.aprroveData
+}
+clickInProgress(){
+  this.trainingReqForms=this.inProgressData
+}
+
+checkOnCondition(training:any){
+  if(training.status.toLocaleUpperCase()=='IN PROGRESS'){
+    return {'background-color': '#D0FFBC'}
+  }
+  return {};
+}
  
 getTrainerTrainingList(){
   this.ser.getTrainerTrainingList().subscribe((resp:any)=>{
     console.log(resp);
+    this.allTrainingList=resp
+    this.pendingData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='PENDING');
+    this.aprroveData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='APPROVED');
+    this.inProgressData=   resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='IN PROGRESS');
+    this.pendingCount=this.pendingData.length;
+    this.approvedCount=this.aprroveData.length;
+    this.inProgressCount=this.inProgressData.length; 
+    this.totalCount=resp.length;
     // < *ngIf ="resp.trainingStatus=='In Progress'"
     (this.trainingReqForms=resp)});
     // </ngIf>

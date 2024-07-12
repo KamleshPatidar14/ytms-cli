@@ -217,7 +217,7 @@ export class TrainingRequestService {
     a.setAttribute('style', 'display: none');
     a.setAttribute('target', 'blank');
     a.href = url;
-    a.download = "AttdenaceReport_traningId_" + data + "_" + trainingName + ".xlsx";
+    a.download = "AttendanceReport_traningId_" + data + "_" + trainingName + ".xlsx";
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
@@ -253,4 +253,11 @@ export class TrainingRequestService {
   createAttendanceforNewNomination(tarningId: any,nominationId:any) {
     return this.http.get<any>(this.url +"/register/attendance/createAttendanceforNewNomination/" + tarningId+"/"+nominationId);
   }
+
+  updateNomination(nomination: any) {
+    console.log("on service" + JSON.stringify(nomination));
+    return this.http.post<any>(this.url + "/register/updateNomination", nomination);
+  }
+
+  
 }

@@ -25,6 +25,14 @@ export class ViewTrfComponent {
   id!: number;
   sideNavStatus: boolean = false;
   trainingReqForms: TrainingReqForm[] = [];
+  pendingCount:any;
+  totalCount:any;
+  pendingData:any;
+  inProgressCount:any;
+  inProgressData:any
+  approvedCount:any;
+  aprroveData:any;
+  allTrainingList:any[]=[];
   trainingReqForm!: FormGroup;
   trainingReqForm1!: FormGroup;
   userRole: string = "";
@@ -78,8 +86,38 @@ export class ViewTrfComponent {
     this._location.back();
   }
 
+  checkOnCondition(training:any){
+    if(training.status.toLocaleUpperCase()=='IN PROGRESS'){
+      return {'background-color': '#D0FFBC'}
+    }
+    return {};
+  }
+
+  clickAll(){
+    this.trainingReqForms=this.allTrainingList
+  }
+  clickPending(){
+    this.trainingReqForms=this.pendingData
+  }
+  clickApprove(){
+    this.trainingReqForms=this.aprroveData
+  }
+  clickInProgress(){
+    this.trainingReqForms=this.inProgressData
+  }
   loadList() {
-    this.ser.getTraining().subscribe((resp: any) => { (this.trainingReqForms = resp) });
+    this.ser.getTraining().subscribe((resp: any) => { 
+      this.trainingReqForms = resp;
+      this.allTrainingList=resp
+     this.pendingData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='PENDING');
+     this.aprroveData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='APPROVED');
+     this.inProgressData=   resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='IN PROGRESS');
+     this.pendingCount=this.pendingData.length;
+     this.approvedCount=this.aprroveData.length;
+     this.inProgressCount=this.inProgressData.length; 
+     this.totalCount=resp.length;
+     console.log(resp);            
+     });
   }
   loadTrainner() {
     this.ser.getTrainerMasterList().subscribe((resp: any) => { this.trainers = resp });

@@ -37,7 +37,8 @@ export class NominationReqComponent {
         current_allocation: ['', [Validators.required]],
         project: ['', [Validators.required]],
         current_location: ['', [Validators.required]],
-        trainingId:[]
+        trainingId:[],
+        employment_status:['Active']
       })
 
       this.nominationReqForm.controls['current_location'].setValue(0, { onlySelf: true });

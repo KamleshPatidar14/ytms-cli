@@ -43,6 +43,7 @@ export class ViewNominationComponent {
     this.ser.getNominationListByTrainingId(trainingId).subscribe(resp => {
 
       this.nomination = resp;
+      console.log(resp)
       if(this.userRole !== 'ROLE_TECHNICAL_MANAGER'  && this.userRole !=='ROLE_COMPETENCY_MANAGER'){
 
         this.nomination =this.nomination.filter(nomination=>{

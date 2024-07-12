@@ -60,6 +60,7 @@ color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
               <th>Employee Id</th>
               <th>Employee Email</th>
               <th>Employee Name</th>
+              <th>Employement Status</th>
               <th><input style="margin-right: 10px;" [(ngModel)]="isChecked"
                 type="checkbox"
                 (change)="clickHeaderCheckBox($event,true)"/>Attendance </th>
@@ -71,10 +72,12 @@ color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
           <tr>
             <td colspan="4" *ngIf="isTraninerAbsent" style="text-align: center;"><span style="color: red;text-align: center;">Trainer is on leave</span> </td>
           </tr>
-          <tr *ngFor="let training of trainingDataList">
+          <tr *ngFor="let training of trainingDataList" [ngStyle]="{'background-color': training.employmentStatus!=='Active' ? '#FFADB0' : 'inherit' }">
               <td>{{training.emp_id}}</td>
               <td>{{training.emp_mail_id}}</td>
               <td>{{training.emp_name}}</td>
+              <td>{{training.employmentStatus}}</td>
+              
               <td><input
                   type="checkbox" [(ngModel)]="training.attendance_status" name="element_name"
                   [checked]="training.attendance_status"
