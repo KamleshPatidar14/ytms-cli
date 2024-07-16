@@ -24,7 +24,8 @@
                                 <button matBadge="{{totalCount}}" (click)="clickAll()" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">All</button>
                                 <button matBadge="{{pendingCount}}" matBadgeColor="warn" (click)="clickPending()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px;">PENDING</button>
                                 <button matBadge="{{approvedCount}}" matBadgeColor="warn" (click)="clickApprove()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px">APPROVED</button>
-                                <button matBadge="{{inProgressCount}}" matBadgeColor="warn" (click)="clickInProgress()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px">IN PROGRESS</button>
+                                <!-- <button matBadge="{{inProgressCount}}" matBadgeColor="warn" (click)="clickInProgress()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px">IN PROGRESS</button> -->
+                                <button matBadge="{{isDeclineCount}}" matBadgeColor="warn" (click)="clickisDeclineData()" class="tablinks" style="background-color: #005ba3; color: white;margin-right: 5px;border-radius: 10px">DECLINED</button>
                             </div>
                         </div>
                     </div>
