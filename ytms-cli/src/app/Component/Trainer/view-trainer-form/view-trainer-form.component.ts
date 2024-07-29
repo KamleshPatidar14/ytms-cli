@@ -31,6 +31,12 @@ export class ViewTrainerFormComponent {
   pendingData:any;
   inProgressCount:any;
   inProgressData:any
+  isCompleteData:any
+  isCompleteCount:any
+  isHoldData:any
+  isHoldCount:any
+  isPlanedData:any
+  isPlanedCount:any
   approvedCount:any;
   aprroveData:any;
   allTrainingList:any
@@ -77,6 +83,7 @@ downloadFile(data: any) {
 
 
 clickAll(){
+  console.log("all is called")
   this.trainingReqForms=this.allTrainingList
 }
 clickPending(){
@@ -86,11 +93,29 @@ clickApprove(){
   this.trainingReqForms=this.aprroveData
 }
 clickInProgress(){
+  console.log("in progress is called")
   this.trainingReqForms=this.inProgressData
+}
+clickisComplete(){
+
+  console.log("Complete is called")
+  this.trainingReqForms=this.isCompleteData
+}
+clickisPlaned(){
+  console.log("Planed is called")
+
+  this.trainingReqForms=this.isPlanedData
+}
+ClickisHoldData(){
+
+  console.log("hold is called")
+
+  this.trainingReqForms=this.isHoldData
 }
 
 checkOnCondition(training:any){
-  if(training.status.toLocaleUpperCase()=='IN PROGRESS'){
+
+  if(training.trainingStatus=='In Progress'){
     return {'background-color': '#D0FFBC'}
   }
   return {};
@@ -98,14 +123,24 @@ checkOnCondition(training:any){
  
 getTrainerTrainingList(){
   this.ser.getTrainerTrainingList().subscribe((resp:any)=>{
-    console.log(resp);
+
+    //console.log(resp.getTrainerTrainingList);
+
     this.allTrainingList=resp
+  
     this.pendingData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='PENDING');
     this.aprroveData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='APPROVED');
-    this.inProgressData=   resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='IN PROGRESS');
+    // this.inProgressData=resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='IN PROGRESS');
+    this.inProgressData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='In Progress');
+    this.isCompleteData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='Completed');
+    this.isPlanedData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='PLANNED'||p.trainingStatus=='Planned');
+    this.isHoldData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='Hold');
     this.pendingCount=this.pendingData.length;
     this.approvedCount=this.aprroveData.length;
-    this.inProgressCount=this.inProgressData.length; 
+    this.inProgressCount=this.inProgressData.length;
+    this.isCompleteCount=this.isCompleteData.length; 
+    this.isPlanedCount=this.isPlanedData.length;  
+    this.isHoldCount=this.isHoldData.length; 
     this.totalCount=resp.length;
     // < *ngIf ="resp.trainingStatus=='In Progress'"
     (this.trainingReqForms=resp)});
@@ -259,8 +294,3 @@ downloadFile2(data: any) {
 
 
 }
-
-
-
-
-

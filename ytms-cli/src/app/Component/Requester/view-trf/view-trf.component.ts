@@ -29,7 +29,9 @@ export class ViewTrfComponent {
   totalCount:any;
   pendingData:any;
   inProgressCount:any;
+  isDeclineData:any;
   inProgressData:any
+  isDeclineCount:any;
   approvedCount:any;
   aprroveData:any;
   allTrainingList:any[]=[];
@@ -105,16 +107,21 @@ export class ViewTrfComponent {
   clickInProgress(){
     this.trainingReqForms=this.inProgressData
   }
+  clickisDeclineData(){
+    this.trainingReqForms=this.isDeclineData
+  }
   loadList() {
     this.ser.getTraining().subscribe((resp: any) => { 
       this.trainingReqForms = resp;
       this.allTrainingList=resp
      this.pendingData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='PENDING');
      this.aprroveData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='APPROVED');
-     this.inProgressData=   resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='IN PROGRESS');
+     this.inProgressData=resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='IN PROGRESS');
+     this.isDeclineData=resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='DECLINED');
      this.pendingCount=this.pendingData.length;
      this.approvedCount=this.aprroveData.length;
-     this.inProgressCount=this.inProgressData.length; 
+     this.inProgressCount=this.inProgressData.length;
+     this.isDeclineCount=this.isDeclineData.length;
      this.totalCount=resp.length;
      console.log(resp);            
      });
