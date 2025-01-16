@@ -116,7 +116,7 @@ ClickisHoldData(){
 checkOnCondition(training:any){
 
   if(training.trainingStatus=='In Progress'){
-    return {'background-color': '#D0FFBC'}
+    return {'background-color': 'grean'}
   }
   return {};
 }
