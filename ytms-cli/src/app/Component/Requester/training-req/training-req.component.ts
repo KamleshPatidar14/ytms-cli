@@ -23,6 +23,7 @@ import { parse } from 'date-fns/esm';
 export class TrainingReqComponent {
   userName: String = "";
   selectedTechnology = "";
+  trainingTypeSelected="";
   sideNavStatus: boolean = false;
   //reg!: User[];
   trainingReqForm!: FormGroup;
@@ -87,7 +88,16 @@ export class TrainingReqComponent {
     this.competencies?.push(competencie);
   }
   loadTrainingTypes() {
-    this.ser.getTrainingTypesMasterList().subscribe((resp: any) => { this.trainingTypes = resp });
+    this.ser.getTrainingTypesMasterList().subscribe((resp: any) => { this.trainingTypes = resp
+      for (let i = 0; i < resp.length; i++) {        
+        if('upskling' == resp[i].name){
+          this.trainingTypeSelected="upskling";
+          this.trainingArray[2] = this.trainingTypeSelected;
+          this.creatTrainingName();
+        }
+      }
+     });
+    
   }
   pushTrainingTypes(training:any) {
     this.trainingTypes?.push(training);
