@@ -132,7 +132,7 @@ getTrainerTrainingList(){
     this.aprroveData= resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='APPROVED');
     // this.inProgressData=resp.filter((p: { status: string; })=>p.status.toLocaleUpperCase()=='IN PROGRESS');
     this.inProgressData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='In Progress');
-    this.isCompleteData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='Completed');
+    this.isCompleteData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='Complete');
     this.isPlanedData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='PLANNED'||p.trainingStatus=='Planned');
     this.isHoldData=resp.filter((p: { trainingStatus: string; })=>p.trainingStatus=='Hold');
     this.pendingCount=this.pendingData.length;
