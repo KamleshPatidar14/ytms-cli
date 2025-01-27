@@ -23,6 +23,7 @@ import { parse } from 'date-fns/esm';
 export class TrainingReqComponent {
   userName: String = "";
   selectedTechnology = "";
+  trainingTypeSelected="";
   sideNavStatus: boolean = false;
   //reg!: User[];
   trainingReqForm!: FormGroup;
@@ -87,7 +88,16 @@ export class TrainingReqComponent {
     this.competencies?.push(competencie);
   }
   loadTrainingTypes() {
-    this.ser.getTrainingTypesMasterList().subscribe((resp: any) => { this.trainingTypes = resp });
+    this.ser.getTrainingTypesMasterList().subscribe((resp: any) => { this.trainingTypes = resp
+      for (let i = 0; i < resp.length; i++) {
+        if('upskling' == resp[i].name){
+          this.trainingTypeSelected="upskling";
+          this.trainingArray[2] = this.trainingTypeSelected;
+          this.creatTrainingName();
+        }
+       }
+      });
+
   }
   pushTrainingTypes(training:any) {
     this.trainingTypes?.push(training);
@@ -209,11 +219,11 @@ export class TrainingReqComponent {
      this.trainingReqForm.markAllAsTouched();
     //  this.trainingReqForm.controls['unit'].markAsTouched();
     //  this.trainingReqForm.controls['trainingType'].markAsTouched();
-    //  this.trainingReqForm.controls['trainingName'].markAsTouched(); 
-    
+    //  this.trainingReqForm.controls['trainingName'].markAsTouched();
+
     //alert("Invaild Unit");
-    //return; 
-          
+    //return;
+
     }
   }
 
@@ -282,8 +292,8 @@ export class TrainingReqComponent {
         }
         this.trainingReqForm.get('startDate')?.setValue(this.datepipe.transform(this.trainingRequestObject?.startDate, 'yyyy-MM-dd'));
         this.trainingReqForm.get('endDate')?.setValue(this.datepipe.transform(this.trainingRequestObject?.endDate, 'yyyy-MM-dd'))
-        
-     
+
+
 
       });
     }
@@ -334,7 +344,7 @@ export class TrainingReqComponent {
     }else{
       this.nomination.push(nomData);
     }
-    
+
   }
 
   hideShowNomination() {
@@ -347,7 +357,7 @@ export class TrainingReqComponent {
     }else{
       this.nomination.push(nomination);
     }
-    
+
   }
 
   setNominationId(nominationId: any) {
@@ -409,9 +419,9 @@ export class TrainingReqComponent {
   calculateTime():void{
     let startDate = new Date("2024-01-01 "+this.trainingReqForm.value.endTime);
     console.log("hello "+startDate);
-    
+
     if(this.trainingReqForm.value.endTime != "" && this.trainingReqForm.value.startTime != ""){
-      
+
       let endTime = new Date("2024-01-01 "+this.trainingReqForm.value.endTime);
       let startTime = new Date("2024-01-01 "+this.trainingReqForm.value.startTime);
       console.log("endtime "+endTime+"  startTime : "+startTime);
@@ -419,7 +429,7 @@ export class TrainingReqComponent {
           {
             this.timeDiff = (differenceInMinutes(endTime,startTime)/60).toFixed(2);
           }
-      
+
     }
   }
 

@@ -27,7 +27,7 @@
 
                                 <!-- <div style="color: rgb(185, 21, 21);" *ngIf= "trainingReqForm.controls['unit'].touched && trainingReqForm.controls['unit'].hasError('required')">Unit is required</div> -->
                                 <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
-                                <div *ngIf="trainingReqForm.controls['unit'].touched && 
+                                <div *ngIf="trainingReqForm.controls['unit'].touched &&
                               trainingReqForm.controls['unit'].invalid" style="color: red;">
                                     <span *ngIf="trainingReqForm.controls['unit'].hasError('required') || trainingReqForm.controls['unit'].hasError('pattern')">
                                   Unit is required
@@ -43,9 +43,9 @@
                               </option>
                           </select>
                                 <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus " title="Click To Add Competency" (click)="openDialog(competencytemplate)"></i></span>
-                                <div *ngIf="trainingReqForm.controls['competency'].touched && 
+                                <div *ngIf="trainingReqForm.controls['competency'].touched &&
                           trainingReqForm.controls['competency'].invalid" style="color: red;">
-                                    <span *ngIf="trainingReqForm.controls['competency'].hasError('required') || 
+                                    <span *ngIf="trainingReqForm.controls['competency'].hasError('required') ||
                             trainingReqForm.controls['competency'].hasError('pattern')">
                               Competency is required
                             </span>
@@ -58,7 +58,7 @@
 
                             <div class="col-2">Training Type</div>
                             <div class="col-4">
-                                <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
+                                <select class="request-drop-down" [(ngModel)]='trainingTypeSelected' formControlName="trainingType" (change)="onTrainingChange($event)">
                             <option [ngValue]="0" disabled >-- Select --</option>
                               <option *ngFor="let trainingType of trainingTypes" value="{{trainingType.name}}">
                                 {{trainingType.name}}
@@ -66,9 +66,9 @@
                           </select>
                                 <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
                                 <!-- <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingType'].touched && trainingReqForm.controls['trainingType'].hasError('required')">TrainingType is required</div> -->
-                                <div *ngIf="trainingReqForm.controls['trainingType'].touched && 
+                                <div *ngIf="trainingReqForm.controls['trainingType'].touched &&
                           trainingReqForm.controls['trainingType'].invalid" style="color: red;">
-                                    <span *ngIf="trainingReqForm.controls['trainingType'].hasError('required') || 
+                                    <span *ngIf="trainingReqForm.controls['trainingType'].hasError('required') ||
                             trainingReqForm.controls['trainingType'].hasError('pattern')">
                               TrainingType is required
                             </span>
@@ -191,7 +191,7 @@
                         <div class="col-2">Single Nomination</div>
                         <div class="col-4">
                             <a (click)="openDialog(nominationtemplate)"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
-                        
+
                         </span>
                       </a>
 
